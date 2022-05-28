@@ -6,7 +6,7 @@ const router = Router();
 // Mandamos la referencia, no la ejecutamos
 router.get('/', usuariosGet);
 
-router.put('/', usuarioPut);
+router.put('/:id', usuarioPut);
 
 router.post('/', usuariosPost);
 
