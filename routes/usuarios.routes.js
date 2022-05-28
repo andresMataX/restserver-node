@@ -1,12 +1,10 @@
 const { Router } = require('express');
+const { usuariosGet } = require('../controllers/usuarios.controller');
 
 const router = Router();
 
-router.get('/', (req, res) => {
-    res.json({
-        msg: 'get API'
-    });
-});
+// Mandamos la referencia
+router.get('/', usuariosGet);
 
 router.put('/', (req, res) => {
     res.json({
