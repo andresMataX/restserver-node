@@ -1,34 +1,17 @@
 const { Router } = require('express');
-const { usuariosGet } = require('../controllers/usuarios.controller');
+const { usuariosGet, usuarioPut, usuariosPost, usuariosDelete, usuariosPatch } = require('../controllers/usuarios.controller');
 
 const router = Router();
 
-// Mandamos la referencia
+// Mandamos la referencia, no la ejecutamos
 router.get('/', usuariosGet);
 
-router.put('/', (req, res) => {
-    res.json({
-        msg: 'put API'
-    });
-});
+router.put('/', usuarioPut);
 
-router.post('/', (req, res) => {
-    res.json({
-        msg: 'post API'
-    });
-});
+router.post('/', usuariosPost);
 
-router.delete('/', (req, res) => {
-    res.json({
-        msg: 'delete API'
-    });
-});
+router.delete('/', usuariosDelete);
 
-router.patch('/', (req, res) => {
-    res.json({
-        msg: 'patch API'
-    });
-});
-
+router.patch('/', usuariosPatch);
 
 module.exports = router;
