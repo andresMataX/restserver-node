@@ -22,12 +22,13 @@ const usuarioPut = (req = request, res = response) => {
     });
 }
 
-const usuariosPost = (req = request, res = response) => {
+const usuariosPost = async (req = request, res = response) => {
 
-    const body = req.body;
+    const { nombre, correo, password, rol } = req.body;
 
-    const usuario = new Usuario(body);
-    usuario.save();
+    const usuario = new Usuario({ nombre, correo, password, rol });
+
+    await usuario.save();
 
     res.json({
         msg: 'post API - controlador',
