@@ -61,8 +61,11 @@ const usuariosPatch = (req = request, res = response) => {
 }
 
 const usuariosDelete = (req = request, res = response) => {
+
+    const { id } = req.params;
+
     res.json({
-        msg: 'delete API - controlador'
+        id
     });
 }
 
