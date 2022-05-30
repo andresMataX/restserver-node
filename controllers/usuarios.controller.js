@@ -8,7 +8,6 @@ const usuariosGet = (req = request, res = response) => {
     const { nombre = 'No Name', apellido } = req.query;
 
     res.json({
-        msg: 'get API - controlador',
         nombre,
         apellido
     });
@@ -25,11 +24,9 @@ const usuarioPut = async (req = request, res = response) => {
         resto.password = bcryptjs.hashSync(password, salt);
     }
 
-    const usuario = await Usuario.findByIdAndUpdate(id, resto, { new: true });
+    const usuario = await Usuario.findByIdAndUpdate(id, resto, { new: true }); // Se envía new: true para traer el usuario actualizado
 
-    res.json({
-        usuario
-    });
+    res.json(usuario);
 }
 
 const usuariosPost = async (req = request, res = response) => {
