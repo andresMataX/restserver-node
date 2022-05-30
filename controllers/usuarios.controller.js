@@ -3,14 +3,13 @@ const bcryptjs = require('bcryptjs');
 
 const Usuario = require('../models/usuario');
 
-const usuariosGet = (req = request, res = response) => {
+const usuariosGet = async (req = request, res = response) => {
 
-    const { nombre = 'No Name', apellido } = req.query;
+    // const { nombre = 'No Name', apellido } = req.query;
 
-    res.json({
-        nombre,
-        apellido
-    });
+    const usuarios = await Usuario.find();
+
+    res.json({ usuarios });
 }
 
 const usuarioPut = async (req = request, res = response) => {
