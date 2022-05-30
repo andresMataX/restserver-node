@@ -6,8 +6,8 @@ const Usuario = require('../models/usuario');
 const usuariosGet = async (req = request, res = response) => {
 
     // const { nombre = 'No Name', apellido } = req.query;
-    const { limite = 5 } = req.query;
-    const usuarios = await Usuario.find().limit(Number(limite));
+    const { limite = 5, desde = 0 } = req.query;
+    const usuarios = await Usuario.find().skip(Number(desde)).limit(Number(limite));
 
     res.json({ usuarios });
 }
