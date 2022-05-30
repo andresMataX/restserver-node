@@ -60,13 +60,17 @@ const usuariosPatch = (req = request, res = response) => {
     });
 }
 
-const usuariosDelete = (req = request, res = response) => {
+const usuariosDelete = async (req = request, res = response) => {
 
     const { id } = req.params;
 
-    res.json({
-        id
-    });
+    // Borrar físicamente
+    // const usuario = await Usuario.findByIdAndDelete(id);
+
+    // Cambiar el estado del usuario
+    const usuario = await Usuario.findByIdAndUpdate(id, { estado: false }, { new: true });
+
+    res.json(usuario);
 }
 
 module.exports = {
