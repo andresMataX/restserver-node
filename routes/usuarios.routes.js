@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 
 const { usuariosGet, usuarioPut, usuariosPost, usuariosDelete, usuariosPatch } = require('../controllers/usuarios.controller');
 
-const { esRolValido, emailExiste } = require('../helpers/db-validators');
+const { esRolValido, emailExiste, existeUsuarioPorId } = require('../helpers/db-validators');
 const { validarCampos } = require('../middlewares/validar-campos');
 
 const router = Router();
@@ -11,7 +11,12 @@ const router = Router();
 // Mandamos la referencia, no la ejecutamos
 router.get('/', usuariosGet);
 
-router.put('/:id', usuarioPut);
+router.put('/:id', [
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom(existeUsuarioPorId),
+    check('rol').custom(esRolValido),
+    validarCampos
+], usuarioPut);
 
 // Definimos un middleware para la validación que estará acumulando los errores para para response
 router.post('/', [

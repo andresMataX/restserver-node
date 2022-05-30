@@ -17,7 +17,7 @@ const usuariosGet = (req = request, res = response) => {
 const usuarioPut = async (req = request, res = response) => {
 
     const { id } = req.params;
-    const { password, google, correo, ...resto } = req.body;
+    const { _id, password, google, correo, ...resto } = req.body;
 
     // TODO: Validar contra base de datos
     if (password) {
@@ -25,7 +25,7 @@ const usuarioPut = async (req = request, res = response) => {
         resto.password = bcryptjs.hashSync(password, salt);
     }
 
-    const usuario = await Usuario.findByIdAndUpdate(id, resto);
+    const usuario = await Usuario.findByIdAndUpdate(id, resto, { new: true });
 
     res.json({
         usuario
