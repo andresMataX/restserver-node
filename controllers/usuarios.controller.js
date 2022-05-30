@@ -38,16 +38,14 @@ const usuariosPost = async (req = request, res = response) => {
         });
     }
 
-    // Encriptar la contraseña
-    // Número de vueltas que será la encriptación (10 por defecto)
-    const salt = bcryptjs.genSaltSync();
+    // Encriptar la contraseña    
+    const salt = bcryptjs.genSaltSync(); // 10 vueltas por defecto
     usuario.password = bcryptjs.hashSync(password, salt);
 
     // Guardar en la base de datos
     await usuario.save();
 
     res.json({
-        msg: 'post API - controlador',
         usuario
     });
 }

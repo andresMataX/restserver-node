@@ -33,5 +33,10 @@ const UsuarioSchema = Schema({
     }
 });
 
+// Sobreescribimos el método toJSON de mongoose
+UsuarioSchema.methods.toJSON = function () {
+    const { __v, password, ...usuario } = this.toObject();
+    return usuario;
+}
 
 module.exports = model('Usuario', UsuarioSchema);
