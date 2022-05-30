@@ -5,11 +5,13 @@ const Usuario = require('../models/usuario');
 
 const usuariosGet = async (req = request, res = response) => {
 
-    // const { nombre = 'No Name', apellido } = req.query;
     const { limite = 5, desde = 0 } = req.query;
+
     const usuarios = await Usuario.find().skip(Number(desde)).limit(Number(limite));
 
-    res.json({ usuarios });
+    const total = await Usuario.countDocuments();
+
+    res.json({ total, usuarios });
 }
 
 const usuarioPut = async (req = request, res = response) => {
